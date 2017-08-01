@@ -2,10 +2,10 @@
 
 
 // Turn on a Led with the RGB components in parameter
-void lightLed(Led led, int r, int g, int b) {
-  Tlc.set(led.red, r);                           // Red component of the LED
-  Tlc.set(led.green, g);                         // Green component of the LED
-  Tlc.set(led.blue, b);                          // Blue component of the LED
+void lightLed(Led led, int r, int g, int b, float brightness) {
+  Tlc.set(led.red, r * brightness);                           // Red component of the LED
+  Tlc.set(led.green, g * brightness);                         // Green component of the LED
+  Tlc.set(led.blue, b * brightness);                          // Blue component of the LED
 }
 
 
@@ -80,3 +80,8 @@ void singleColor(int color_pot, int * predefined_red, int * predefined_green, in
     predefined_blue[0] = 0;
   }
 }
+
+
+float modifiedMap(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (float) (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min; 
+ }

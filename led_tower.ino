@@ -3,6 +3,12 @@
 #include "led.h"
 
 
+// Definition of the potentiometer of color adjustment
+#define COLOR_INPUT A1
+// Definition of the potentiometer of color adjustment
+#define BRIGHT_INPUT A2
+
+
 // Initialization of a table of Leds and its RGB components
 Led leds[16];
 int red[16];
@@ -14,7 +20,18 @@ int predefined_red[16];
 int predefined_green[16];
 int predefined_blue[16];
 
+// Initialization of the variables from the Arduino analog inputs 
+int color_pot;
+float bright_pot;
+
+
 void setup() {
+  
+  // Declaration of A1 as an input
+  pinMode(COLOR_INPUT, INPUT);
+  
+  // Declaration of A1 as an input
+  pinMode(BRIGHT_INPUT, INPUT);
 
   // Association of Leds to its RGB components
   for (int i=0 ; i<16 ; ++i){
@@ -30,16 +47,24 @@ void setup() {
 }
 
 void loop() {
+  
+  // Read the value from the color potentiometer
+  color_pot = analogRead(COLOR_INPUT);
+
+  // Read the value from the brightness potentiometer
+  bright_pot = analogRead(BRIGHT_INPUT);
+  bright_pot = modifiedMap(bright_pot, 0, 1023, 0.1, 1);
+  
   //predefinedColors(300, predefined_red, predefined_green, predefined_blue);
-  for(int i=0 ; i<1024 ; ++i){
-    singleColor(i, predefined_red, predefined_green, predefined_blue);
-    for(int j=0 ; j<9 ; ++j){
-      //lightLed(leds[i], predefined_red[i], predefined_green[i], predefined_blue[i]);
-      lightLed(leds[j], predefined_red[0], predefined_green[0], predefined_blue[0]);
-    }
-    Tlc.update();
-    delay(20);
-    Tlc.clear();
+  singleColor(color_pot, predefined_red, predefined_green, predefined_blue);
+  
+  for(int i=0 ; i<1 ; ++i){
+    //lightLed(leds[i], predefined_red[i], predefined_green[i], predefined_blue[i]);
+    lightLed(leds[i], predefined_red[0], predefined_green[0], predefined_blue[0], bright_pot);
   }
+  
+  Tlc.update();
+  delay(20);
+  Tlc.clear();
   
 }
