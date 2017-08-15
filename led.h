@@ -8,7 +8,6 @@ typedef struct {
   int blue;
 } Led;
 
-void lightLed(Led led, int r, int g, int b, float brightness);
+void lightLed(Led led, int r, int g, int b);
 void predefinedColors(int color_pot, int * predefined_red, int * predefined_green, int * predefined_blue);
 void singleColor(int color_pot, int * predefined_red, int * predefined_green, int * predefined_blue);
-float modifiedMap(float x, float in_min, float in_max, float out_min, float out_max);

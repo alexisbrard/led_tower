@@ -5,8 +5,15 @@
 
 // Definition of the potentiometer of color adjustment
 #define COLOR_INPUT A1
-// Definition of the potentiometer of color adjustment
-#define BRIGHT_INPUT A2
+
+// Definition of the potentiometer of speed adjustment
+#define SPEED_INPUT A2
+
+// Definition of the potentiometer of threshold adjustment
+#define THRESHOLD_INPUT A3
+
+// Definition of the potentiometer of gain adjustment
+#define GAIN_INPUT A4
 
 
 // Initialization of a table of Leds and its RGB components
@@ -22,16 +29,21 @@ int predefined_blue[16];
 
 // Initialization of the variables from the Arduino analog inputs 
 int color_pot;
-float bright_pot;
+int speed_pot;
+int threshlod_pot;
+int gain_pot;
 
+// Delay between two updates of Leds
+int updates;
 
 void setup() {
   
-  // Declaration of A1 as an input
+  // Declaration of A1, A2, A3 and A4 as inputs
   pinMode(COLOR_INPUT, INPUT);
+  pinMode(SPEED_INPUT, INPUT);
+  pinMode(THRESHOLD_INPUT, INPUT);
+  pinMode(GAIN_INPUT, INPUT);
   
-  // Declaration of A1 as an input
-  pinMode(BRIGHT_INPUT, INPUT);
 
   // Association of Leds to its RGB components
   for (int i=0 ; i<16 ; ++i){
@@ -50,21 +62,20 @@ void loop() {
   
   // Read the value from the color potentiometer
   color_pot = analogRead(COLOR_INPUT);
-
-  // Read the value from the brightness potentiometer
-  bright_pot = analogRead(BRIGHT_INPUT);
-  bright_pot = modifiedMap(bright_pot, 0, 1023, 0.1, 1);
+  
+  // Read the value from the speed potentiometer
+  updates = 20 + analogRead(SPEED_INPUT) / 20;
   
   //predefinedColors(300, predefined_red, predefined_green, predefined_blue);
   singleColor(color_pot, predefined_red, predefined_green, predefined_blue);
   
   for(int i=0 ; i<1 ; ++i){
     //lightLed(leds[i], predefined_red[i], predefined_green[i], predefined_blue[i]);
-    lightLed(leds[i], predefined_red[0], predefined_green[0], predefined_blue[0], bright_pot);
+    lightLed(leds[i], predefined_red[0], predefined_green[0], predefined_blue[0]);
   }
   
   Tlc.update();
-  delay(20);
+  delay(updates);
   Tlc.clear();
   
 }
