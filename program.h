@@ -5,7 +5,7 @@
 #include "led.h"
 
 
-void independantProgram1(int color, int scrolling_speed, int * counter, Led * leds, int * predefined_red, int * predefined_green, int * predefined_blue);
+void independantProgram1(int color, int scrolling_speed, int * counter, Led * leds, int * red, int * green, int * blue);
 
 
 #endif // PROGRAM_H

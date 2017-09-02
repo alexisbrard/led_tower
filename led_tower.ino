@@ -23,11 +23,6 @@ int red[16];
 int green[16];
 int blue[16];
 
-// Initialization of tables of predefined colors
-int predefined_red[16];
-int predefined_green[16];
-int predefined_blue[16];
-
 // Initialization of the variables from the Arduino analog inputs 
 int color_pot;
 int speed_pot;
@@ -61,6 +56,8 @@ void setup() {
   Tlc.init();
   Tlc.clear();
   
+  // Debug
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -72,11 +69,14 @@ void loop() {
   updates = 20 + analogRead(SPEED_INPUT) / 20;
 
   
-  independantProgram1(color_pot, scrolling_speed, &counter, leds, predefined_red, predefined_green, predefined_blue);
-  
+  independantProgram1(color_pot, scrolling_speed, &counter, leds, red, green, blue);
+
   
   Tlc.update();
   delay(updates);
+  
+  Serial.println(color_pot);
+  Serial.print("\n");
   
   //Tlc.clear();
   
