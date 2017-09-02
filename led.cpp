@@ -9,6 +9,26 @@ void lightLed(Led led, int r, int g, int b) {
 }
 
 
+// Turn on gradually a Led to its RGB commands
+void graduallyTurnOn(Led led, int red_command, int green_command, int blue_command, int * red, int * green, int * blue) {
+  if (*red >= red_command && *green >= green_command && *blue >= blue_command) {
+    *red = red_command;
+    *green = green_command;
+    *blue = blue_command;
+  }
+  else {
+    if (*red < red_command)
+      *red += red_command / 50;
+    if (*green < green_command)
+      *green += green_command / 50;
+    if (*blue < blue_command)
+    *  blue += blue_command / 50;  
+  }
+  lightLed(led, *red, *green, *blue);
+}
+
+
+
 // Set predefined colors to the Leds, according to the potentiometer that controls color
 void predefinedColors(int color_pot, int * red, int * green, int * blue) {
   
@@ -42,7 +62,7 @@ void predefinedColors(int color_pot, int * red, int * green, int * blue) {
 }
 
 
-// 
+// Set a manual color to a Led from the color potentiometer
 void singleColor(int color_pot, int * red, int * green, int * blue) {
   if (color_pot < 170) {          // Red + >green
     red[0] = 4095;
