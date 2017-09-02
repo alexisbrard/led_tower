@@ -1,6 +1,7 @@
 // Update the configuration file of the TLC to put 3 TLC in cascade
 #include "Tlc5940.h"
 #include "led.h"
+#include "program.h"
 
 
 // Definition of the potentiometer of color adjustment
@@ -36,6 +37,10 @@ int gain_pot;
 // Delay between two updates of Leds
 int updates;
 
+// independantProgram1
+int scrolling_speed;
+int counter;
+
 void setup() {
   
   // Declaration of A1, A2, A3 and A4 as inputs
@@ -65,17 +70,15 @@ void loop() {
   
   // Read the value from the speed potentiometer
   updates = 20 + analogRead(SPEED_INPUT) / 20;
+
   
-  //predefinedColors(300, predefined_red, predefined_green, predefined_blue);
-  singleColor(color_pot, predefined_red, predefined_green, predefined_blue);
+  independantProgram1(color_pot, scrolling_speed, &counter, leds, predefined_red, predefined_green, predefined_blue);
   
-  for(int i=0 ; i<1 ; ++i){
-    //lightLed(leds[i], predefined_red[i], predefined_green[i], predefined_blue[i]);
-    lightLed(leds[i], predefined_red[0], predefined_green[0], predefined_blue[0]);
-  }
   
   Tlc.update();
   delay(updates);
-  Tlc.clear();
+  
+  //Tlc.clear();
+  
   
 }
