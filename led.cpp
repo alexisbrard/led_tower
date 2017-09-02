@@ -16,27 +16,27 @@ void predefinedColors(int color_pot, int * predefined_red, int * predefined_gree
     int red[16] = {0, 0, 0, 0, 0, 0, 0, 0, 800, 1600, 1900, 2400, 3000, 3500, 3800, 4095};
     int green[16] = {0, 600, 1000, 1600, 2400, 3200, 3800, 4095, 4095, 3800, 3200, 1900, 1300, 800, 300, 0};
     int blue[16] = {4095, 4000, 3800, 3600, 3500, 3200, 2400, 800, 0, 0, 0, 0, 0, 0, 0, 0};
-    memcpy(predefined_red, red, 16);
-    memcpy(predefined_green, green, 16);
-    memcpy(predefined_blue, blue, 16);
+    memcpy(predefined_red, red, 32);      // 32 is the number of bytes to be copied, and an int is on 2 bytes
+    memcpy(predefined_green, green, 32);
+    memcpy(predefined_blue, blue, 32);
   }
   
   else if (color_pot < 400) {
     int red[16] = {4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095, 3000, 2000, 1500, 500, 0};
     int green[16] = {0, 0, 20, 50, 100, 200, 400, 700, 1000, 1500, 2000, 3000, 4095, 4095, 4095, 4095};
     int blue[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 500, 1000, 2000};
-    memcpy(predefined_red, red, 16);
-    memcpy(predefined_green, green, 16);
-    memcpy(predefined_blue, blue, 16);
+    memcpy(predefined_red, red, 32);
+    memcpy(predefined_green, green, 32);
+    memcpy(predefined_blue, blue, 32);
   }
   
   else if (color_pot < 600) {
     int red[16] = {4095, 4095, 4095, 4095, 4095, 0, 0, 0, 0, 0, 0, 500, 1500, 4095, 4095, 4095};
     int green[16] = {0, 200, 1000, 2000, 4095, 4095, 4095, 4095, 4095, 1500, 500, 0, 0, 0, 0, 0};
     int blue[16] = {0, 0, 0, 0, 0, 0, 500, 1500, 4095, 4095, 4095, 4095, 4095, 2500, 500, 0};
-    memcpy(predefined_red, red, 16);
-    memcpy(predefined_green, green, 16);
-    memcpy(predefined_blue, blue, 16);
+    memcpy(predefined_red, red, 32);
+    memcpy(predefined_green, green, 32);
+    memcpy(predefined_blue, blue, 32);
   }
 
 }
