@@ -10,12 +10,14 @@ void lightLed(Led led, int r, int g, int b) {
 
 
 // Turn on gradually a Led to its RGB commands
-void graduallyTurnOn(Led led, int red_command, int green_command, int blue_command, int * red, int * green, int * blue) {
-  if (*red >= red_command && *green >= green_command && *blue >= blue_command) {
-    *red = red_command;
-    *green = green_command;
-    *blue = blue_command;
+// Return 1 if the Led reaches the command, 0 if not yet
+int graduallyTurnOn(Led led, int red_command, int green_command, int blue_command, int * red, int * green, int * blue) {
+  
+  if (*red == red_command && *green == green_command && *blue == blue_command) {
+      lightLed(led, *red, *green, *blue);
+      return 1;
   }
+  
   else {
     if (*red < red_command)
       *red += red_command / 50;
@@ -24,7 +26,48 @@ void graduallyTurnOn(Led led, int red_command, int green_command, int blue_comma
     if (*blue < blue_command)
     *  blue += blue_command / 50;  
   }
+  
+  if (*red > red_command)
+    *red = red_command;
+  if (*green > green_command)
+    *green = green_command;
+  if (*blue > blue_command)
+    *blue = blue_command;
+  
   lightLed(led, *red, *green, *blue);
+  return 0;
+  
+}
+
+
+// Turn off gradually a Led
+// Return 1 when the Led is turned off, 0 if not yet
+int graduallyTurnOff(Led led, int * red, int * green, int * blue) {
+  
+  if (*red == 0 && *green == 0 && *blue == 0)
+    return 1;
+    
+  else {
+    if (*red > 0)
+      *red -= 82;
+    if (*green > 0)
+      *green -= 82;
+    if (*blue > 0)
+      *blue -= 82;  
+  }
+  
+  
+  
+  if (*red < 0) 
+    *red = 0;
+  if (*green < 0) 
+    *green = 0;
+  if (*blue < 0) 
+    *blue = 0;
+    
+  lightLed(led, *red, *green, *blue);
+  return 0;
+ 
 }
 
 

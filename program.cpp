@@ -1,4 +1,5 @@
 #include "program.h"
+#include "Tlc5940.h"
 
 
 // Led scrolling
@@ -13,10 +14,15 @@ void independantProgram1(int color, int scrolling_speed, int * counter, Led * le
     //lightLed(leds[i], red[0], green[0], blue[0]);
     lightLed(leds[i], red[i], green[i], blue[i]);
   }*/
-  
-  graduallyTurnOn(leds[0], 2000, 2000, 4095, &red[0], &green[0], &blue[0]);
 
+  while(!graduallyTurnOn(leds[0], 3000, 2000, 4095, &red[0], &green[0], &blue[0])) {
+    delay(20);
+    Tlc.update();
+  }
+  while(!graduallyTurnOff(leds[0], &red[0], &green[0], &blue[0])) {
+    delay(20);
+    Tlc.update();
+  }
 
- 
   
 }
