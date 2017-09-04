@@ -56,8 +56,6 @@ int graduallyTurnOff(Led led, int * red, int * green, int * blue) {
       *blue -= 82 * (*blue / max3(*red, *green, *blue));  
   }
   
-  
-  
   if (*red < 0) 
     *red = 0;
   if (*green < 0) 
