@@ -61,8 +61,12 @@ void setup() {
   // Initialization of useful variables
   counter = 0;
   
+  // Initialise the random number generator with a fairly random input (A5 is an unconnected pin)
+  randomSeed(analogRead(A5));
+  
   // Debug
   Serial.begin(9600);
+  
 }
 
 void loop() {
