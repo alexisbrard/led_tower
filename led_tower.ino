@@ -58,6 +58,9 @@ void setup() {
   Tlc.init();
   Tlc.clear();
   
+  // Initialization of useful variables
+  counter = 0;
+  
   // Debug
   Serial.begin(9600);
 }
