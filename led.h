@@ -5,6 +5,7 @@
 #include "Tlc5940.h"
 #include "functions.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 typedef struct {
@@ -16,8 +17,9 @@ typedef struct {
 void lightLed(Led led, int r, int g, int b);
 int graduallyTurnOn(Led led, int red_command, int green_command, int blue_command, int * red, int * green, int * blue);
 int graduallyTurnOff(Led led, int * red, int * green, int * blue);
-void predefinedColors(int color_pot, int * red, int * green, int * blue);
+void predefinedColor(int color_pot, int * red, int * green, int * blue);
 void singleColor(int color_pot, int * red, int * green, int * blue);
+void randomColor(int * red, int * green, int * blue);
 
 
 #endif // LED_H

@@ -74,6 +74,6 @@ void loop() {
   updates = analogRead(SPEED_INPUT);
 
 
-  independantProgram2(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  independantProgram3(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
   
 }

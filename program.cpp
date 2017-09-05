@@ -27,7 +27,7 @@ void independantProgram1(int color, int updates, int * counter, Led * leds, int 
 // Led scrolling, one color defined by the user with the color potentiometer
 void independantProgram2(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue){
   
-  predefinedColors(color, predefined_red, predefined_green, predefined_blue);
+  predefinedColor(color, predefined_red, predefined_green, predefined_blue);
   
   updates = 10 + updates / 50;
 
@@ -44,4 +44,19 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
  if (*counter > 15)
    *counter = 0;
   
+}
+
+
+// 
+int independantProgram3(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+  
+  randomColor(red, green, blue);
+  
+  lightLed(leds[0], red[0], green[0], blue[0]);
+
+  Tlc.update();
+  delay(1000);
+  
+  
+    
 }

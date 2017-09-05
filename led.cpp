@@ -71,7 +71,7 @@ int graduallyTurnOff(Led led, int * red, int * green, int * blue) {
 
 
 // Set predefined colors to the Leds, according to the potentiometer that controls color
-void predefinedColors(int color_pot, int * red, int * green, int * blue) {
+void predefinedColor(int color_pot, int * red, int * green, int * blue) {
   
   if (color_pot < 200){
     int predefined_red[16] = {0, 0, 0, 0, 0, 0, 0, 0, 800, 1600, 1900, 2400, 3000, 3500, 3800, 4095};
@@ -140,6 +140,22 @@ void singleColor(int color_pot, int * red, int * green, int * blue) {
     green[0] = 0;
     blue[0] = 0;
   }
+}
+
+
+// Set a random color
+void randomColor(int * red, int * green, int * blue) {
+  
+  int predefined_red[11] = {4095, 0, 0, 4095, 2000, 0, 4095, 0, 4095, 4095, 4095};
+  int predefined_green[11] = {0, 4095, 0, 0, 4095, 4095, 700, 4095, 0, 4095, 1500};
+  int predefined_blue[11] = {0, 0, 4095, 2000, 0, 4095, 0, 1000, 1000, 4095, 0};
+  
+  int color = rand()%11;
+  
+  red[0] = predefined_red[color];
+  green[0] = predefined_green[color];
+  blue[0] = predefined_blue[color];
+
 }
 
 
