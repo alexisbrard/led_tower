@@ -20,11 +20,11 @@ int graduallyTurnOn(Led led, int red_command, int green_command, int blue_comman
   
   else {
     if (*red < red_command)
-      *red += red_command / 50;
+      *red += red_command / 50 + 1;    // +1, because when the command is too weak, the value isn't incremented
     if (*green < green_command)
-      *green += green_command / 50;
+      *green += green_command / 50 + 1;
     if (*blue < blue_command)
-    *  blue += blue_command / 50;  
+    *  blue += blue_command / 50 + 1;  
   }
   
   if (*red > red_command)
@@ -49,11 +49,11 @@ int graduallyTurnOff(Led led, int * red, int * green, int * blue) {
     
   else {
     if (*red > 0)
-      *red -= 82 * (*red / max3(*red, *green, *blue));
+      *red -= 82 * (*red / max3(*red, *green, *blue)) + 2;    // +2, because it can sometimes remain a weak color when the Led must be turned off
     if (*green > 0)
-      *green -= 82 * (*green / max3(*red, *green, *blue));
+      *green -= 82 * (*green / max3(*red, *green, *blue)) + 2;
     if (*blue > 0)
-      *blue -= 82 * (*blue / max3(*red, *green, *blue));  
+      *blue -= 82 * (*blue / max3(*red, *green, *blue)) + 2;  
   }
   
   if (*red < 0) 
