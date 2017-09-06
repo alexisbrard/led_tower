@@ -36,7 +36,8 @@ int gain_pot;
 int updates;
 
 // Variables useful for independant programs
-int counter;
+int counter;           // programs 1, 2, 3
+int number_of_leds;    // program 3
 
 void setup() {
   
@@ -60,6 +61,7 @@ void setup() {
   
   // Initialization of useful variables
   counter = 0;
+  number_of_leds = 0;
   
   // Initialise the random number generator with a fairly random input (A5 is an unconnected pin)
   randomSeed(analogRead(A5));
@@ -78,6 +80,7 @@ void loop() {
   updates = analogRead(SPEED_INPUT);
 
 
-  independantProgram3(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  //independantProgram2(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  independantProgram3(updates, &counter, &number_of_leds, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
   
 }

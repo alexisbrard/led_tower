@@ -48,15 +48,28 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
 
 
 // 
-int independantProgram3(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+/*int independantProgram3(int updates, int * counter, int * number, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
   
-  randomColor(red, green, blue);
+  if (*counter >= *number || *counter == 0) {
+    int i = 0;
+    while(!graduallyTurnOff(leds[0], &red[0], &green[0], &blue[0])) {
+      for (i=1 ; i<*counter ; ++i) {
+        graduallyTurnOff(leds[i], &red[i], &green[i], &blue[i]);
+        delay(updates);
+        Tlc.update();   
+      }
+    }
+    *number = random(3, 15);
+    randomColor(predefined_red, predefined_green, predefined_blue);
+    *counter = 0;
+  }
   
-  lightLed(leds[0], red[0], green[0], blue[0]);
-
-  Tlc.update();
-  delay(1000);
+  updates = 10 + updates / 50;
   
-  
-    
-}
+  while(!graduallyTurnOn(leds[*counter], predefined_red[0], predefined_green[0], predefined_blue[0], &red[*counter], &green[*counter], &blue[*counter])) {
+    delay(updates);
+    Tlc.update();    
+  }
+  (*counter)++;
+   
+}*/
