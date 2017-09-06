@@ -48,7 +48,7 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
 
 
 // 
-/*int independantProgram3(int updates, int * counter, int * number, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+/*void independantProgram3(int updates, int * counter, int * number, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
   
   if (*counter >= *number || *counter == 0) {
     int i = 0;
@@ -73,3 +73,26 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
   (*counter)++;
    
 }*/
+
+
+// Color variation, all Leds turned on
+void independantProgram4(int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+  
+  updates = 10 + updates / 50;
+  
+  int i = 0;
+  
+  for (i=0 ; i<16; ++i) {
+    singleColor((*counter + 30*i)%1100, red, green, blue);
+    lightLed(leds[i], red[0], green[0], blue[0]);
+  }
+  
+  delay(updates);
+  Tlc.update(); 
+  
+  (*counter)++;
+  if (*counter > 1100)
+    *counter = 0;
+  
+  
+}
