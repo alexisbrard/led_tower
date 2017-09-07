@@ -76,14 +76,16 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
 
 
 // Color variation, all Leds turned on
-void independantProgram4(int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+void independantProgram4(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
   
   updates = 10 + updates / 50;
+  
+  color /= 20;
   
   int i = 0;
   
   for (i=0 ; i<16; ++i) {
-    singleColor((*counter + 30*i)%1100, red, green, blue);
+    singleColor((*counter + color*i), red, green, blue);
     lightLed(leds[i], red[0], green[0], blue[0]);
   }
   

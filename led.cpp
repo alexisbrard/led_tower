@@ -106,6 +106,8 @@ void predefinedColor(int color_pot, int * red, int * green, int * blue) {
 // Set a manual color to a Led from the color potentiometer
 void singleColor(int color_pot, int * red, int * green, int * blue) {
   
+  color_pot %= 1100;
+  
   if (color_pot < 170) {          // Red + >green
     red[0] = 4095;
     green[0] = map(color_pot, 0, 170, 0, 4095);
