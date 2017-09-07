@@ -82,6 +82,7 @@ void loop() {
 
   //independantProgram2(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
   //independantProgram3(updates, &counter, &number_of_leds, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
-  independantProgram4(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  //independantProgram4(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  independantProgram5(updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
   
 }

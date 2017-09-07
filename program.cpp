@@ -96,5 +96,26 @@ void independantProgram4(int color, int updates, int * counter, Led * leds, int 
   if (*counter > 1100)
     *counter = 0;
   
+}
+
+
+// Random Leds and colors
+void independantProgram5(int updates, int * previous_led, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+  
+  randomColor (predefined_red, predefined_green, predefined_blue);
+  
+  updates = 10 + updates / 50;
+  
+  int led_number = random(0, 15);
+  while (led_number == *previous_led)
+    led_number = random(0, 15);
+    
+  while(!graduallyTurnOn(leds[led_number], predefined_red[0], predefined_green[0], predefined_blue[0], &red[led_number], &green[led_number], &blue[led_number])) {
+    graduallyTurnOff(leds[*previous_led], &red[*previous_led], &green[*previous_led], &blue[*previous_led]);
+    Tlc.update();
+    delay(updates);
+  }
+  
+  *previous_led = led_number;
   
 }
