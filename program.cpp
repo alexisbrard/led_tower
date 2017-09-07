@@ -24,7 +24,7 @@ void independantProgram1(int color, int updates, int * counter, Led * leds, int 
 }
 
 
-// Led scrolling, one color defined by the user with the color potentiometer
+// Led scrolling, color gradient defined by the user with the color potentiometer
 void independantProgram2(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue){
   
   predefinedColor(color, predefined_red, predefined_green, predefined_blue);
@@ -76,7 +76,7 @@ void independantProgram2(int color, int updates, int * counter, Led * leds, int 
 
 
 // Color variation, all Leds turned on
-void independantProgram4(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue, int * predefined_red, int * predefined_green, int * predefined_blue) {
+void independantProgram4(int color, int updates, int * counter, Led * leds, int * red, int * green, int * blue) {
   
   updates = 10 + updates / 50;
   
@@ -117,5 +117,38 @@ void independantProgram5(int updates, int * previous_led, Led * leds, int * red,
   }
   
   *previous_led = led_number;
+  
+}
+
+
+
+// Program reacting to sound with a color gradient
+void program1(int micro, int color, int updates, int threshold, int gain, Led * leds, int * red, int * green, int * blue) {
+  
+  predefinedColor(color, red, green, blue);
+  
+  updates = 20 + updates / 20;
+  
+  threshold = threshold / 10 - 50;
+  
+  micro -= (520 - threshold);
+  
+  int gap = 5 + gain / 50;
+  
+  Tlc.clear();
+  
+  lightLed(leds[0], red[0], green[0], blue[0]);
+  int i = 1;
+  for (i=1 ; i<16 ; ++i) {
+    if (abs(micro) > (i + 1.5) * gap)
+      lightLed(leds[i], red[i], green[i], blue[i]);  
+  }
+  
+  
+  delay(updates);
+  Tlc.update();
+  
+  Serial.print(micro);
+  Serial.println("\n");
   
 }

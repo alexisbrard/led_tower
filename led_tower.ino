@@ -4,6 +4,9 @@
 #include "Tlc5940.h"
 
 
+// Definition of the pin that receive the signal from the micro
+#define MIC_INPUT A0
+
 // Definition of the potentiometer of color adjustment
 #define COLOR_INPUT A1
 
@@ -27,9 +30,10 @@ int predefined_green[16];
 int predefined_blue[16];
 
 // Initialization of the variables from the Arduino analog inputs 
+int micro;
 int color_pot;
 int speed_pot;
-int threshlod_pot;
+int threshold_pot;
 int gain_pot;
 
 // Delay between two updates of Leds
@@ -41,7 +45,8 @@ int number_of_leds;    // program 3
 
 void setup() {
   
-  // Declaration of A1, A2, A3 and A4 as inputs
+  // Declaration of A0, A1, A2, A3 and A4 as inputs
+  pinMode(MIC_INPUT, INPUT);
   pinMode(COLOR_INPUT, INPUT);
   pinMode(SPEED_INPUT, INPUT);
   pinMode(THRESHOLD_INPUT, INPUT);
@@ -73,16 +78,19 @@ void setup() {
 
 void loop() {
   
-  // Read the value from the color potentiometer
+  // Read the value from the inputs
+  micro = analogRead(MIC_INPUT);
   color_pot = analogRead(COLOR_INPUT);
-  
-  // Read the value from the speed potentiometer
   updates = analogRead(SPEED_INPUT);
-
-
+  threshold_pot = analogRead(THRESHOLD_INPUT);
+  gain_pot = analogRead(GAIN_INPUT);
+  
+  
+  
   //independantProgram2(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
   //independantProgram3(updates, &counter, &number_of_leds, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
-  //independantProgram4(color_pot, updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
-  independantProgram5(updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  //independantProgram4(color_pot, updates, &counter, leds, red, green, blue);
+  //independantProgram5(updates, &counter, leds, red, green, blue, predefined_red, predefined_green, predefined_blue);
+  program1(micro, color_pot, updates, threshold_pot, gain_pot, leds, red, green, blue);
   
 }
