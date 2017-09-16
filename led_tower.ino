@@ -35,6 +35,7 @@ int color_pot;
 int speed_pot;
 int threshold_pot;
 int gain_pot;
+long average;
 
 // Delay between two updates of Leds
 int updates;
@@ -68,6 +69,13 @@ void setup() {
   counter = 0;
   number_of_leds = 0;
   
+  // Initialization of the average value from the micro
+  average = 0;
+  
+  for (int i=0 ; i<15000 ; ++i) 
+    average += analogRead(MIC_INPUT);
+  average /= 15000;
+  
   // Initialise the random number generator with a fairly random input (A5 is an unconnected pin)
   randomSeed(analogRead(A5));
   
@@ -79,7 +87,7 @@ void setup() {
 void loop() {
   
   // Read the value from the inputs
-  micro = analogRead(MIC_INPUT);
+  micro = analogRead(MIC_INPUT) - average;
   color_pot = analogRead(COLOR_INPUT);
   updates = analogRead(SPEED_INPUT);
   threshold_pot = analogRead(THRESHOLD_INPUT);

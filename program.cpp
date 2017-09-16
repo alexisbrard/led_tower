@@ -129,9 +129,7 @@ void program1(int micro, int color, int updates, int threshold, int gain, Led * 
   
   updates = 20 + updates / 20;
   
-  threshold = threshold / 10 - 50;
-  
-  micro -= (520 - threshold);
+  threshold = threshold / 50 - 5;
   
   int gap = 5 + gain / 50;
   
@@ -140,7 +138,7 @@ void program1(int micro, int color, int updates, int threshold, int gain, Led * 
   lightLed(leds[0], red[0], green[0], blue[0]);
   int i = 1;
   for (i=1 ; i<16 ; ++i) {
-    if (abs(micro) > (i + 1.5) * gap)
+    if (abs(micro) > threshold + (i + 1.5) * gap)
       lightLed(leds[i], red[i], green[i], blue[i]);  
   }
   
